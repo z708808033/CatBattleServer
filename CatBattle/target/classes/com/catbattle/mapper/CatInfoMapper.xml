@@ -1,0 +1,655 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.catbattle.mapper.CatInfoMapper">
+  <resultMap id="BaseResultMap" type="com.catbattle.bean.CatInfo">
+    <id column="cat_id" jdbcType="VARCHAR" property="catId" />
+    <result column="cat_name" jdbcType="VARCHAR" property="catName" />
+    <result column="category" jdbcType="VARCHAR" property="category" />
+    <result column="default_level" jdbcType="VARCHAR" property="defaultLevel" />
+    <result column="max_level" jdbcType="VARCHAR" property="maxLevel" />
+    <result column="HP" jdbcType="VARCHAR" property="hp" />
+    <result column="KB" jdbcType="VARCHAR" property="kb" />
+    <result column="attack" jdbcType="VARCHAR" property="attack" />
+    <result column="attack_rate" jdbcType="VARCHAR" property="attackRate" />
+    <result column="speed" jdbcType="VARCHAR" property="speed" />
+    <result column="attack_animation" jdbcType="VARCHAR" property="attackAnimation" />
+    <result column="attack_distance" jdbcType="VARCHAR" property="attackDistance" />
+    <result column="cooldown" jdbcType="VARCHAR" property="cooldown" />
+    <result column="attack_type" jdbcType="VARCHAR" property="attackType" />
+    <result column="cost" jdbcType="VARCHAR" property="cost" />
+    <result column="CD" jdbcType="VARCHAR" property="cd" />
+    <result column="skill" jdbcType="VARCHAR" property="skill" />
+    <result column="get_condition" jdbcType="VARCHAR" property="getCondition" />
+    <result column="alias" jdbcType="VARCHAR" property="alias" />
+    <result column="img" jdbcType="VARCHAR" property="img" />
+    <result column="anti_enemy" jdbcType="VARCHAR" property="antiEnemy" />
+    <result column="skill_type" jdbcType="VARCHAR" property="skillType" />
+    <result column="category_describe" jdbcType="VARCHAR" property="categoryDescribe" />
+    <result column="anti_enemy_describe" jdbcType="VARCHAR" property="antiEnemyDescribe" />
+    <result column="skill_type_describe" jdbcType="VARCHAR" property="skillTypeDescribe" />
+    <result column="attack_level" jdbcType="INTEGER" property="attackLevel" />
+    <result column="attack_before" jdbcType="REAL" property="attackBefore" />
+    <result column="attack_after" jdbcType="REAL" property="attackAfter" />
+    <result column="HP_level" jdbcType="INTEGER" property="hpLevel" />
+    <result column="HP_before" jdbcType="REAL" property="hpBefore" />
+    <result column="HP_after" jdbcType="REAL" property="hpAfter" />
+    <result column="basic_attack" jdbcType="REAL" property="basicAttack" />
+    <result column="basic_HP" jdbcType="REAL" property="basicHp" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    cat_id, cat_name, category, default_level, max_level, HP, KB, attack, attack_rate, 
+    speed, attack_animation, attack_distance, cooldown, attack_type, cost, CD, skill, 
+    get_condition, alias, img, anti_enemy, skill_type, category_describe, anti_enemy_describe, 
+    skill_type_describe, attack_level, attack_before, attack_after, HP_level, HP_before, 
+    HP_after, basic_attack, basic_HP
+  </sql>
+  <select id="selectByExample" parameterType="com.catbattle.bean.CatInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cat_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cat_info
+    where cat_id = #{catId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cat_info
+    where cat_id = #{catId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.catbattle.bean.CatInfoExample">
+    delete from cat_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.catbattle.bean.CatInfo">
+    insert into cat_info (cat_id, cat_name, category, 
+      default_level, max_level, HP, 
+      KB, attack, attack_rate, 
+      speed, attack_animation, attack_distance, 
+      cooldown, attack_type, cost, 
+      CD, skill, get_condition, 
+      alias, img, anti_enemy, 
+      skill_type, category_describe, anti_enemy_describe, 
+      skill_type_describe, attack_level, attack_before, 
+      attack_after, HP_level, HP_before, 
+      HP_after, basic_attack, basic_HP
+      )
+    values (#{catId,jdbcType=VARCHAR}, #{catName,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, 
+      #{defaultLevel,jdbcType=VARCHAR}, #{maxLevel,jdbcType=VARCHAR}, #{hp,jdbcType=VARCHAR}, 
+      #{kb,jdbcType=VARCHAR}, #{attack,jdbcType=VARCHAR}, #{attackRate,jdbcType=VARCHAR}, 
+      #{speed,jdbcType=VARCHAR}, #{attackAnimation,jdbcType=VARCHAR}, #{attackDistance,jdbcType=VARCHAR}, 
+      #{cooldown,jdbcType=VARCHAR}, #{attackType,jdbcType=VARCHAR}, #{cost,jdbcType=VARCHAR}, 
+      #{cd,jdbcType=VARCHAR}, #{skill,jdbcType=VARCHAR}, #{getCondition,jdbcType=VARCHAR}, 
+      #{alias,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR}, #{antiEnemy,jdbcType=VARCHAR}, 
+      #{skillType,jdbcType=VARCHAR}, #{categoryDescribe,jdbcType=VARCHAR}, #{antiEnemyDescribe,jdbcType=VARCHAR}, 
+      #{skillTypeDescribe,jdbcType=VARCHAR}, #{attackLevel,jdbcType=INTEGER}, #{attackBefore,jdbcType=REAL}, 
+      #{attackAfter,jdbcType=REAL}, #{hpLevel,jdbcType=INTEGER}, #{hpBefore,jdbcType=REAL}, 
+      #{hpAfter,jdbcType=REAL}, #{basicAttack,jdbcType=REAL}, #{basicHp,jdbcType=REAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.catbattle.bean.CatInfo">
+    insert into cat_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="catId != null">
+        cat_id,
+      </if>
+      <if test="catName != null">
+        cat_name,
+      </if>
+      <if test="category != null">
+        category,
+      </if>
+      <if test="defaultLevel != null">
+        default_level,
+      </if>
+      <if test="maxLevel != null">
+        max_level,
+      </if>
+      <if test="hp != null">
+        HP,
+      </if>
+      <if test="kb != null">
+        KB,
+      </if>
+      <if test="attack != null">
+        attack,
+      </if>
+      <if test="attackRate != null">
+        attack_rate,
+      </if>
+      <if test="speed != null">
+        speed,
+      </if>
+      <if test="attackAnimation != null">
+        attack_animation,
+      </if>
+      <if test="attackDistance != null">
+        attack_distance,
+      </if>
+      <if test="cooldown != null">
+        cooldown,
+      </if>
+      <if test="attackType != null">
+        attack_type,
+      </if>
+      <if test="cost != null">
+        cost,
+      </if>
+      <if test="cd != null">
+        CD,
+      </if>
+      <if test="skill != null">
+        skill,
+      </if>
+      <if test="getCondition != null">
+        get_condition,
+      </if>
+      <if test="alias != null">
+        alias,
+      </if>
+      <if test="img != null">
+        img,
+      </if>
+      <if test="antiEnemy != null">
+        anti_enemy,
+      </if>
+      <if test="skillType != null">
+        skill_type,
+      </if>
+      <if test="categoryDescribe != null">
+        category_describe,
+      </if>
+      <if test="antiEnemyDescribe != null">
+        anti_enemy_describe,
+      </if>
+      <if test="skillTypeDescribe != null">
+        skill_type_describe,
+      </if>
+      <if test="attackLevel != null">
+        attack_level,
+      </if>
+      <if test="attackBefore != null">
+        attack_before,
+      </if>
+      <if test="attackAfter != null">
+        attack_after,
+      </if>
+      <if test="hpLevel != null">
+        HP_level,
+      </if>
+      <if test="hpBefore != null">
+        HP_before,
+      </if>
+      <if test="hpAfter != null">
+        HP_after,
+      </if>
+      <if test="basicAttack != null">
+        basic_attack,
+      </if>
+      <if test="basicHp != null">
+        basic_HP,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="catId != null">
+        #{catId,jdbcType=VARCHAR},
+      </if>
+      <if test="catName != null">
+        #{catName,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null">
+        #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultLevel != null">
+        #{defaultLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="maxLevel != null">
+        #{maxLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="hp != null">
+        #{hp,jdbcType=VARCHAR},
+      </if>
+      <if test="kb != null">
+        #{kb,jdbcType=VARCHAR},
+      </if>
+      <if test="attack != null">
+        #{attack,jdbcType=VARCHAR},
+      </if>
+      <if test="attackRate != null">
+        #{attackRate,jdbcType=VARCHAR},
+      </if>
+      <if test="speed != null">
+        #{speed,jdbcType=VARCHAR},
+      </if>
+      <if test="attackAnimation != null">
+        #{attackAnimation,jdbcType=VARCHAR},
+      </if>
+      <if test="attackDistance != null">
+        #{attackDistance,jdbcType=VARCHAR},
+      </if>
+      <if test="cooldown != null">
+        #{cooldown,jdbcType=VARCHAR},
+      </if>
+      <if test="attackType != null">
+        #{attackType,jdbcType=VARCHAR},
+      </if>
+      <if test="cost != null">
+        #{cost,jdbcType=VARCHAR},
+      </if>
+      <if test="cd != null">
+        #{cd,jdbcType=VARCHAR},
+      </if>
+      <if test="skill != null">
+        #{skill,jdbcType=VARCHAR},
+      </if>
+      <if test="getCondition != null">
+        #{getCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="alias != null">
+        #{alias,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null">
+        #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="antiEnemy != null">
+        #{antiEnemy,jdbcType=VARCHAR},
+      </if>
+      <if test="skillType != null">
+        #{skillType,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryDescribe != null">
+        #{categoryDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="antiEnemyDescribe != null">
+        #{antiEnemyDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="skillTypeDescribe != null">
+        #{skillTypeDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="attackLevel != null">
+        #{attackLevel,jdbcType=INTEGER},
+      </if>
+      <if test="attackBefore != null">
+        #{attackBefore,jdbcType=REAL},
+      </if>
+      <if test="attackAfter != null">
+        #{attackAfter,jdbcType=REAL},
+      </if>
+      <if test="hpLevel != null">
+        #{hpLevel,jdbcType=INTEGER},
+      </if>
+      <if test="hpBefore != null">
+        #{hpBefore,jdbcType=REAL},
+      </if>
+      <if test="hpAfter != null">
+        #{hpAfter,jdbcType=REAL},
+      </if>
+      <if test="basicAttack != null">
+        #{basicAttack,jdbcType=REAL},
+      </if>
+      <if test="basicHp != null">
+        #{basicHp,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.catbattle.bean.CatInfoExample" resultType="java.lang.Long">
+    select count(*) from cat_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update cat_info
+    <set>
+      <if test="record.catId != null">
+        cat_id = #{record.catId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.catName != null">
+        cat_name = #{record.catName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.category != null">
+        category = #{record.category,jdbcType=VARCHAR},
+      </if>
+      <if test="record.defaultLevel != null">
+        default_level = #{record.defaultLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maxLevel != null">
+        max_level = #{record.maxLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hp != null">
+        HP = #{record.hp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.kb != null">
+        KB = #{record.kb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attack != null">
+        attack = #{record.attack,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attackRate != null">
+        attack_rate = #{record.attackRate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.speed != null">
+        speed = #{record.speed,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attackAnimation != null">
+        attack_animation = #{record.attackAnimation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attackDistance != null">
+        attack_distance = #{record.attackDistance,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cooldown != null">
+        cooldown = #{record.cooldown,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attackType != null">
+        attack_type = #{record.attackType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cost != null">
+        cost = #{record.cost,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cd != null">
+        CD = #{record.cd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.skill != null">
+        skill = #{record.skill,jdbcType=VARCHAR},
+      </if>
+      <if test="record.getCondition != null">
+        get_condition = #{record.getCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="record.alias != null">
+        alias = #{record.alias,jdbcType=VARCHAR},
+      </if>
+      <if test="record.img != null">
+        img = #{record.img,jdbcType=VARCHAR},
+      </if>
+      <if test="record.antiEnemy != null">
+        anti_enemy = #{record.antiEnemy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.skillType != null">
+        skill_type = #{record.skillType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.categoryDescribe != null">
+        category_describe = #{record.categoryDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="record.antiEnemyDescribe != null">
+        anti_enemy_describe = #{record.antiEnemyDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="record.skillTypeDescribe != null">
+        skill_type_describe = #{record.skillTypeDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attackLevel != null">
+        attack_level = #{record.attackLevel,jdbcType=INTEGER},
+      </if>
+      <if test="record.attackBefore != null">
+        attack_before = #{record.attackBefore,jdbcType=REAL},
+      </if>
+      <if test="record.attackAfter != null">
+        attack_after = #{record.attackAfter,jdbcType=REAL},
+      </if>
+      <if test="record.hpLevel != null">
+        HP_level = #{record.hpLevel,jdbcType=INTEGER},
+      </if>
+      <if test="record.hpBefore != null">
+        HP_before = #{record.hpBefore,jdbcType=REAL},
+      </if>
+      <if test="record.hpAfter != null">
+        HP_after = #{record.hpAfter,jdbcType=REAL},
+      </if>
+      <if test="record.basicAttack != null">
+        basic_attack = #{record.basicAttack,jdbcType=REAL},
+      </if>
+      <if test="record.basicHp != null">
+        basic_HP = #{record.basicHp,jdbcType=REAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update cat_info
+    set cat_id = #{record.catId,jdbcType=VARCHAR},
+      cat_name = #{record.catName,jdbcType=VARCHAR},
+      category = #{record.category,jdbcType=VARCHAR},
+      default_level = #{record.defaultLevel,jdbcType=VARCHAR},
+      max_level = #{record.maxLevel,jdbcType=VARCHAR},
+      HP = #{record.hp,jdbcType=VARCHAR},
+      KB = #{record.kb,jdbcType=VARCHAR},
+      attack = #{record.attack,jdbcType=VARCHAR},
+      attack_rate = #{record.attackRate,jdbcType=VARCHAR},
+      speed = #{record.speed,jdbcType=VARCHAR},
+      attack_animation = #{record.attackAnimation,jdbcType=VARCHAR},
+      attack_distance = #{record.attackDistance,jdbcType=VARCHAR},
+      cooldown = #{record.cooldown,jdbcType=VARCHAR},
+      attack_type = #{record.attackType,jdbcType=VARCHAR},
+      cost = #{record.cost,jdbcType=VARCHAR},
+      CD = #{record.cd,jdbcType=VARCHAR},
+      skill = #{record.skill,jdbcType=VARCHAR},
+      get_condition = #{record.getCondition,jdbcType=VARCHAR},
+      alias = #{record.alias,jdbcType=VARCHAR},
+      img = #{record.img,jdbcType=VARCHAR},
+      anti_enemy = #{record.antiEnemy,jdbcType=VARCHAR},
+      skill_type = #{record.skillType,jdbcType=VARCHAR},
+      category_describe = #{record.categoryDescribe,jdbcType=VARCHAR},
+      anti_enemy_describe = #{record.antiEnemyDescribe,jdbcType=VARCHAR},
+      skill_type_describe = #{record.skillTypeDescribe,jdbcType=VARCHAR},
+      attack_level = #{record.attackLevel,jdbcType=INTEGER},
+      attack_before = #{record.attackBefore,jdbcType=REAL},
+      attack_after = #{record.attackAfter,jdbcType=REAL},
+      HP_level = #{record.hpLevel,jdbcType=INTEGER},
+      HP_before = #{record.hpBefore,jdbcType=REAL},
+      HP_after = #{record.hpAfter,jdbcType=REAL},
+      basic_attack = #{record.basicAttack,jdbcType=REAL},
+      basic_HP = #{record.basicHp,jdbcType=REAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.catbattle.bean.CatInfo">
+    update cat_info
+    <set>
+      <if test="catName != null">
+        cat_name = #{catName,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null">
+        category = #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultLevel != null">
+        default_level = #{defaultLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="maxLevel != null">
+        max_level = #{maxLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="hp != null">
+        HP = #{hp,jdbcType=VARCHAR},
+      </if>
+      <if test="kb != null">
+        KB = #{kb,jdbcType=VARCHAR},
+      </if>
+      <if test="attack != null">
+        attack = #{attack,jdbcType=VARCHAR},
+      </if>
+      <if test="attackRate != null">
+        attack_rate = #{attackRate,jdbcType=VARCHAR},
+      </if>
+      <if test="speed != null">
+        speed = #{speed,jdbcType=VARCHAR},
+      </if>
+      <if test="attackAnimation != null">
+        attack_animation = #{attackAnimation,jdbcType=VARCHAR},
+      </if>
+      <if test="attackDistance != null">
+        attack_distance = #{attackDistance,jdbcType=VARCHAR},
+      </if>
+      <if test="cooldown != null">
+        cooldown = #{cooldown,jdbcType=VARCHAR},
+      </if>
+      <if test="attackType != null">
+        attack_type = #{attackType,jdbcType=VARCHAR},
+      </if>
+      <if test="cost != null">
+        cost = #{cost,jdbcType=VARCHAR},
+      </if>
+      <if test="cd != null">
+        CD = #{cd,jdbcType=VARCHAR},
+      </if>
+      <if test="skill != null">
+        skill = #{skill,jdbcType=VARCHAR},
+      </if>
+      <if test="getCondition != null">
+        get_condition = #{getCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="alias != null">
+        alias = #{alias,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null">
+        img = #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="antiEnemy != null">
+        anti_enemy = #{antiEnemy,jdbcType=VARCHAR},
+      </if>
+      <if test="skillType != null">
+        skill_type = #{skillType,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryDescribe != null">
+        category_describe = #{categoryDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="antiEnemyDescribe != null">
+        anti_enemy_describe = #{antiEnemyDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="skillTypeDescribe != null">
+        skill_type_describe = #{skillTypeDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="attackLevel != null">
+        attack_level = #{attackLevel,jdbcType=INTEGER},
+      </if>
+      <if test="attackBefore != null">
+        attack_before = #{attackBefore,jdbcType=REAL},
+      </if>
+      <if test="attackAfter != null">
+        attack_after = #{attackAfter,jdbcType=REAL},
+      </if>
+      <if test="hpLevel != null">
+        HP_level = #{hpLevel,jdbcType=INTEGER},
+      </if>
+      <if test="hpBefore != null">
+        HP_before = #{hpBefore,jdbcType=REAL},
+      </if>
+      <if test="hpAfter != null">
+        HP_after = #{hpAfter,jdbcType=REAL},
+      </if>
+      <if test="basicAttack != null">
+        basic_attack = #{basicAttack,jdbcType=REAL},
+      </if>
+      <if test="basicHp != null">
+        basic_HP = #{basicHp,jdbcType=REAL},
+      </if>
+    </set>
+    where cat_id = #{catId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.catbattle.bean.CatInfo">
+    update cat_info
+    set cat_name = #{catName,jdbcType=VARCHAR},
+      category = #{category,jdbcType=VARCHAR},
+      default_level = #{defaultLevel,jdbcType=VARCHAR},
+      max_level = #{maxLevel,jdbcType=VARCHAR},
+      HP = #{hp,jdbcType=VARCHAR},
+      KB = #{kb,jdbcType=VARCHAR},
+      attack = #{attack,jdbcType=VARCHAR},
+      attack_rate = #{attackRate,jdbcType=VARCHAR},
+      speed = #{speed,jdbcType=VARCHAR},
+      attack_animation = #{attackAnimation,jdbcType=VARCHAR},
+      attack_distance = #{attackDistance,jdbcType=VARCHAR},
+      cooldown = #{cooldown,jdbcType=VARCHAR},
+      attack_type = #{attackType,jdbcType=VARCHAR},
+      cost = #{cost,jdbcType=VARCHAR},
+      CD = #{cd,jdbcType=VARCHAR},
+      skill = #{skill,jdbcType=VARCHAR},
+      get_condition = #{getCondition,jdbcType=VARCHAR},
+      alias = #{alias,jdbcType=VARCHAR},
+      img = #{img,jdbcType=VARCHAR},
+      anti_enemy = #{antiEnemy,jdbcType=VARCHAR},
+      skill_type = #{skillType,jdbcType=VARCHAR},
+      category_describe = #{categoryDescribe,jdbcType=VARCHAR},
+      anti_enemy_describe = #{antiEnemyDescribe,jdbcType=VARCHAR},
+      skill_type_describe = #{skillTypeDescribe,jdbcType=VARCHAR},
+      attack_level = #{attackLevel,jdbcType=INTEGER},
+      attack_before = #{attackBefore,jdbcType=REAL},
+      attack_after = #{attackAfter,jdbcType=REAL},
+      HP_level = #{hpLevel,jdbcType=INTEGER},
+      HP_before = #{hpBefore,jdbcType=REAL},
+      HP_after = #{hpAfter,jdbcType=REAL},
+      basic_attack = #{basicAttack,jdbcType=REAL},
+      basic_HP = #{basicHp,jdbcType=REAL}
+    where cat_id = #{catId,jdbcType=VARCHAR}
+  </update>
+</mapper>
