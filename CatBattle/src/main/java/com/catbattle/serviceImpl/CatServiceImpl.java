@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.catbattle.bean.CatInfo;
 import com.catbattle.bean.CatInfoExample;
+import com.catbattle.bean.EnemyInfo;
+import com.catbattle.bean.EnemyInfoExample;
 import com.catbattle.bean.CatInfoExample.Criteria;
 import com.catbattle.mapper.CatInfoMapper;
 import com.catbattle.mapper.EnemyInfoMapper;
@@ -99,16 +101,27 @@ public class CatServiceImpl implements CatService{
 		return CatSpider.getCat(catId);
 	}
 
+//	@Override
+//	public void test() {
+//		CatInfoExample e = new CatInfoExample();
+//		List<CatInfo> list = catMapper.selectByExample(e);
+//		for (CatInfo c : list) {
+//			String img = c.getImg();
+//			img = "http://localhost:8080" + img.substring(img.indexOf("/image"));
+//			c.setImg(img);
+//			catMapper.updateByPrimaryKey(c);
+//		}
+//	}
+	
 	@Override
 	public void test() {
-		CatInfoExample e = new CatInfoExample();
-		List<CatInfo> list = catMapper.selectByExample(e);
-		for (CatInfo c : list) {
-			String s = c.getAntiEnemy();
-			if(s.equals(",")) {
-				c.setAntiEnemy("");
-			}
-			catMapper.updateByPrimaryKey(c);
+		EnemyInfoExample e = new EnemyInfoExample();
+		List<EnemyInfo> list = enemyMapper.selectByExample(e);
+		for (EnemyInfo en : list) {
+			String img = en.getImg();
+			img = "http://localhost:8080" + img.substring(img.indexOf("/image"));
+			en.setImg(img);
+			enemyMapper.updateByPrimaryKey(en);
 		}
 	}
 }

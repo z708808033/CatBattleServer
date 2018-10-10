@@ -1,5 +1,8 @@
 package com.catbattle.controller;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,8 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.catbattle.bean.CatInfo;
 import com.catbattle.service.CatService;
@@ -86,6 +89,18 @@ public class CatController {
 			return "SUCCESS";
 		}
 		return catSV.updateCats(cats);
+	}
+	
+	@RequestMapping(value="/uploadCatImg",method=RequestMethod.POST)
+	public String uploadCatImg(MultipartFile file) {
+		try {
+			byte[] bytes = file.getBytes();
+			Path path = Paths.get("src/main/webapp/image/cat/", file.getOriginalFilename());
+			Files.write(path, bytes);
+			return "SUCCESS";
+		} catch (Exception e) {
+			return e.getMessage();
+		}
 	}
 	
 	@RequestMapping("/test")

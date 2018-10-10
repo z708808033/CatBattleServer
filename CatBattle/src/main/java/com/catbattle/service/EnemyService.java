@@ -15,4 +15,8 @@ public interface EnemyService {
 	public List<EnemyInfo> getEnemiesByEnemyName(String enemyName);
 
 	public String updateEnemy(EnemyInfo enemy);
+
+	public EnemyInfo previewEnemy(String enemyId);
+
+	public String saveEnemy(EnemyInfo enemy);
 }

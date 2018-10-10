@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
+Implementation-Vendor: Pivotal Software, Inc.
 Implementation-Title: CatBattle
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: Administrator
 Implementation-Vendor-Id: com.catbattle
-Build-Jdk: 1.8.0_112
-Implementation-URL: http://projects.spring.io/spring-boot/CatBattle/
+Build-Jdk: 1.7.0_45
+Built-By: Z
 Created-By: Maven Integration for Eclipse
-Implementation-Vendor: Pivotal Software, Inc.
+Implementation-URL: http://projects.spring.io/spring-boot/CatBattle/
 

@@ -6,11 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.catbattle.bean.CatInfo;
 import com.catbattle.bean.EnemyInfo;
 import com.catbattle.bean.EnemyInfoExample;
 import com.catbattle.bean.EnemyInfoExample.Criteria;
 import com.catbattle.mapper.EnemyInfoMapper;
 import com.catbattle.service.EnemyService;
+import com.catbattle.spider.cat.CatSpider;
+import com.catbattle.spider.enemy.EnemySpider;
 
 @Service
 @Transactional
@@ -59,6 +62,21 @@ public class EnemyServiceImpl implements EnemyService{
 	public String updateEnemy(EnemyInfo enemy) {
 		try {
 			enemyMapper.updateByPrimaryKey(enemy);
+			return "SUCCESS";
+		} catch (Exception e) {
+			return e.getMessage();
+		}
+	}
+
+	@Override
+	public EnemyInfo previewEnemy(String enemyId) {
+		return EnemySpider.getEnemy(enemyId);
+	}
+
+	@Override
+	public String saveEnemy(EnemyInfo enemy) {
+		try {
+			this.enemyMapper.insert(enemy);
 			return "SUCCESS";
 		} catch (Exception e) {
 			return e.getMessage();

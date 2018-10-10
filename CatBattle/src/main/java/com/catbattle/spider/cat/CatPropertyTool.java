@@ -158,7 +158,7 @@ public class CatPropertyTool {
 		Elements Elements = element.select("td[class=bgc12][rowspan=2] + td > img");
 		for (int i = 0; i < Elements.size(); i++) {
 			String imgUrl = Elements.get(i).attr("src");
-			String imgName = "assets/image/cat" + imgUrl.substring(imgUrl.lastIndexOf("/"));
+			String imgName = "http://localhost:8080/image/cat" + imgUrl.substring(imgUrl.lastIndexOf("/"));
 			list.add(imgName);
 		}
 		return list.toArray(new String[0]);
